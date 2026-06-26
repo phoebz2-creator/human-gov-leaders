@@ -1,44 +1,79 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>湖南省政府领导信息库</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中国政治研究</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-    <header>
-        <h1>湖南省政府领导信息库</h1>
-        <p>湖南省政府领导过往工作经历与任免信息查询系统</p>
-        <div class="notice">
-            数据范围：省政府领导及重点部门负责人｜信息来源：政府官网、人大任免公告等官方渠道｜状态：持续核验更新
-          </div>
-    </header>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>中国政治研究</h1>
+      <p>中国各级领导信息与政治数据库</p>
+      <div class="top-nav">
+        <button class="top-tab active" data-section="leaders">领导</button>
+        <button class="top-tab" data-section="database">数据库</button>
+        <button class="top-tab" data-section="others">其他</button>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <aside class="sidebar">
-          <div class="top-bar">
-            <input type="text" id="searchInput" placeholder="搜索姓名或职务，例如：毛伟明、省长">
-          </div>
-      
-          <div id="leader-list"></div>
-        </aside>
-        </div>
-        <div id="leader-detail">
+  <main>
+    <section id="leaders-section" class="main-section active">
+      <aside class="sidebar">
+        <div class="module-title">领导</div>
 
-            <h2>请选择一位领导</h2>
-
-            <p>点击左侧领导即可查看详细信息。</p>
-
+        <div class="nav-block">
+          <div class="nav-heading">中央领导</div>
+          <button class="province-btn disabled">建设中</button>
         </div>
 
-    </main>
+        <div class="nav-block">
+            <div class="group-title">地方领导</div>
 
-    <script src="script.js"></script>
+            <div class="region-group">
+              <div class="region-title" onclick="toggleRegion()">
+                地方省份 ▼
+              </div>
+            
+              <div id="provinceList" class="province-list">
+                <div class="province-btn active" data-province="hunan">湖南</div>
+                <div class="province-btn" data-province="hubei">湖北</div>
+                <div class="province-btn disabled">广东（待接入）</div>
+                <div class="province-btn disabled">江苏（待接入）</div>
+              </div>
+            </div>
 
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="搜索姓名或职务，例如：省长、财政厅"
+        />
+
+        <div id="leaderList"></div>
+      </aside>
+
+      <section class="content">
+        <div id="leaderDetail">
+          <h2>请选择一位领导</h2>
+          <p>点击左侧领导卡片查看详细信息。</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="database-section" class="main-section placeholder-section">
+      <h2>数据库</h2>
+      <p>该模块暂时预留，后续可接入政策、机构、任免公告、地方数据等内容。</p>
+    </section>
+
+    <section id="others-section" class="main-section placeholder-section">
+      <h2>其他</h2>
+      <p>该模块暂时预留，后续可根据研究需要扩展。</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
-
 </html>

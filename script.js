@@ -1,5 +1,9 @@
-const list = document.getElementById("leader-list");
-const detail = document.getElementById("leader-detail");
+let leaders = [];
+
+let currentLevel = "home";   // home / central / local / province
+let isInitialized = false;
+const list = document.getElementById("leaderList");
+const detail = document.getElementById("leaderDetail");
 const searchInput = document.getElementById("searchInput");
 
 function renderList(data = leaders) {
@@ -90,13 +94,141 @@ searchInput.addEventListener("input", function() {
   }
 });
 
-fetch("data/leaders.json")
-  .then(response => response.json())
-  .then(data => {
-    leaders = data.map((item, index) => ({
-      id: index + 1,
-      ...item
-    }));
-    renderList();
-    showDetail(1);
+function loadProvince(province) {
+    fetch(`data/${province}.json`)
+      .then(res => res.json())
+      .then(data => {
+  
+        leaders = data.map((item, index) => ({
+          id: index + 1,
+          ...item
+        }));
+  
+        renderList();
+  
+        // 🔥 强制刷新 UI
+        document.querySelectorAll(".card")
+          .forEach(c => c.classList.remove("active"));
+  
+        if (leaders.length > 0) {
+          showDetail(leaders[0].id);
+        }
+      })
+      .catch(err => console.error(err));
+  }
+  
+  // 初始化加载
+  let currentProvince = "hunan";
+loadProvince(currentProvince);
+  
+  // =======================
+  // 顶部菜单切换
+  // =======================
+  
+  const tabs = document.querySelectorAll(".top-tab");
+  const sections = document.querySelectorAll(".main-section");
+  
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+  
+      tabs.forEach(t => t.classList.remove("active"));
+      sections.forEach(s => s.classList.remove("active"));
+  
+      tab.classList.add("active");
+  
+      document
+        .getElementById(tab.dataset.section + "-section")
+        .classList.add("active");
+    });
   });
+  
+  // =======================
+  // 省份按钮
+  // =======================
+  
+  function initProvinces() {
+    if (isInitialized) return;
+    isInitialized = true;
+    fetch("data/index.json")
+      .then(res => res.json())
+      .then(list => {
+  
+        const container = document.querySelector(".sidebar");
+        container.innerHTML = ""; // 防止重复
+  
+        list.forEach(p => {
+          const btn = document.createElement("div");
+          btn.className = "province-btn";
+          btn.textContent = p.name;
+  
+          btn.addEventListener("click", () => {
+  
+            document.querySelectorAll(".province-btn")
+              .forEach(b => b.classList.remove("active"));
+  
+            btn.classList.add("active");
+  
+            loadProvince(p.file);
+          });
+  
+          container.appendChild(btn);
+        });
+  
+        if (list.length > 0) {
+          loadProvince(list[0].file);
+        }
+      });
+  }
+    
+  document.querySelectorAll(".province-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+  
+      const province = btn.dataset.province;
+  
+      if (!province) return;
+  
+      document.querySelectorAll(".province-btn")
+        .forEach(b => b.classList.remove("active"));
+  
+      btn.classList.add("active");
+  
+      currentProvince = province;
+      loadProvince(province);
+    });
+  });
+
+  function toggleRegion() {
+    const list = document.getElementById("provinceList");
+    list.style.display = list.style.display === "none" ? "block" : "none";
+  }
+
+  function openCentral() {
+    fetch("data/central.json")
+      .then(res => res.json())
+      .then(data => {
+        leaders = data;
+        renderList();
+        showDetail(1);
+      });
+  }
+
+  function openLocal() {
+    const list = [
+      { name: "湖南", file: "hunan" },
+      { name: "湖北", file: "hubei" }
+    ];
+  
+    const container = document.querySelector(".sidebar");
+  
+    container.innerHTML = `<div class="group-title">地方省份</div>`;
+  
+    list.forEach(p => {
+      const btn = document.createElement("div");
+      btn.className = "card";
+      btn.innerHTML = `<h3>${p.name}</h3>`;
+  
+      btn.onclick = () => loadProvince(p.file);
+  
+      container.appendChild(btn);
+    });
+  }
