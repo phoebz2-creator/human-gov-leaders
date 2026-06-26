@@ -95,7 +95,7 @@ searchInput.addEventListener("input", function() {
 });
 
 function loadProvince(province) {
-    fetch(`data/${province}.json`)
+    fetch("./data/${province}.json")
       .then(res => res.json())
       .then(data => {
   
