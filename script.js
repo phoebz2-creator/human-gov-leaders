@@ -139,16 +139,16 @@ searchInput.addEventListener("input", function() {
 });
 
 function loadProvince(province) {
-    // 抛弃去要单独文件的逻辑，直接去读本地和线上都有的合并大数据库
     fetch("./data/all_leaders_combined.json")
       .then(res => res.json())
       .then(allData => {
         
-        // 从总数据库里，过滤出当前点击省份的数据
-        // 这里的 item.province 对应你的 beijing, henan, inner_mongolia 等
-        const provinceData = allData.filter(item => item.province === province);
+        // 💡 核心修复行：如果是对象格式，用 Object.values 把它强制转换成数组
+        const dataArray = Array.isArray(allData) ? allData : Object.values(allData).flat();
   
-        // 保持你原本的映射、渲染和刷新逻辑 100% 不变
+        // 使用转换后的标准数组进行过滤
+        const provinceData = dataArray.filter(item => item.province === province);
+  
         leaders = provinceData.map((item, index) => ({
           id: index + 1,
           ...item
@@ -156,14 +156,12 @@ function loadProvince(province) {
   
         renderList();
   
-        // 🔥 强制刷新 UI
         document.querySelectorAll(".card")
           .forEach(c => c.classList.remove("active"));
   
         if (leaders.length > 0) {
           showDetail(leaders[0].id);
         } else {
-          // 防错提示
           document.getElementById("leaderDetail").innerHTML = `<h2>暂无数据</h2><p>该省份数据正在对齐中。</p>`;
         }
       })
