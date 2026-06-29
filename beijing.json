@@ -1,0 +1,13 @@
+{
+  "province": "beijing",
+  "province_zh": "北京",
+  "base_url": "https://www.beijing.gov.cn",
+  "government_leaders": ["殷勇", "夏林茂", "于英杰", "谈绪祥", "高朋", "司马红", "严明", "孙硕"],
+  "department_leaders": [
+    "李先忠(市财政局局长)", 
+    "杨秀玲(市发展改革委主任)", 
+    "亓延军(市公安局局长)", 
+    "李奕(市教育委主任)",
+    "姜广智(市经济和信息化局局长)"
+  ]
+}

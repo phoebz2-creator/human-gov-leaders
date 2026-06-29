@@ -1,0 +1,12 @@
+{
+    "province": "shandong",
+    "province_zh": "山东",
+    "base_url": "https://www.shandong.gov.cn",
+    "government_leaders": ["周乃翔", "张海波", "江成", "范波", "宋军继", "周立伟", "陈平", "李伟"],
+    "department_leaders": [
+      "孙爱军(省发展改革委主任)", 
+      "李峰(省财政厅厅长)", 
+      "李伟(兼省公安厅厅长)", 
+      "李明(省教育厅厅长)"
+    ]
+  }

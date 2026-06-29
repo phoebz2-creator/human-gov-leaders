@@ -1,0 +1,12 @@
+{
+    "province": "zhejiang",
+    "province_zh": "浙江",
+    "base_url": "https://www.zj.gov.cn",
+    "government_leaders": ["王浩", "徐文光", "卢山", "张家胜", "胡伟", "李岩益", "杨青玖"],
+    "department_leaders": [
+      "杜旭亮(省发展改革委主任)", 
+      "尹学群(省财政厅厅长)", 
+      "杨青玖(兼省公安厅厅长)", 
+      "陈根芳(省教育厅厅长)"
+    ]
+  }

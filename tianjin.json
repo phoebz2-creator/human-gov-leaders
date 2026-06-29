@@ -1,0 +1,12 @@
+{
+  "province": "tianjin",
+  "province_zh": "天津",
+  "base_url": "https://www.tj.gov.cn",
+  "government_leaders": ["张工", "刘桂平", "李文海", "朱鹏", "谢元", "范少军", "张玲"],
+  "department_leaders": [
+    "戴永康(市发展改革委主任)", 
+    "吴丽祥(市财政局局长)", 
+    "衡长福(市公安局局长)", 
+    "荆洪阳(市教育委主任)"
+  ]
+}

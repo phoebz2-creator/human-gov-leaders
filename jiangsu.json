@@ -1,0 +1,12 @@
+{
+    "province": "jiangsu",
+    "province_zh": "江苏",
+    "base_url": "https://www.js.gov.cn",
+    "government_leaders": ["许昆林", "马欣", "胡广杰", "夏心旻", "方伟", "李耀光", "徐缨", "王华", "吕德明"],
+    "department_leaders": [
+      "沈剑荣(省发展改革委主任)", 
+      "王天琦(省财政厅厅长)", 
+      "李耀光(兼省公安厅厅长)", 
+      "江涌(省教育厅厅长)"
+    ]
+  }

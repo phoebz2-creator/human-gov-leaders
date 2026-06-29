@@ -1,5 +1,49 @@
 let leaders = [];
 
+const provinces = [
+    { name: "北京", file: "beijing" },
+    { name: "上海", file: "shanghai" },
+    { name: "天津", file: "tianjin" },
+    { name: "重庆", file: "chongqing" },
+  
+    { name: "河北", file: "hebei" },
+    { name: "山西", file: "shanxi" },
+    { name: "辽宁", file: "liaoning" },
+    { name: "吉林", file: "jilin" },
+    { name: "黑龙江", file: "heilongjiang" },
+  
+    { name: "江苏", file: "jiangsu" },
+    { name: "浙江", file: "zhejiang" },
+    { name: "安徽", file: "anhui" },
+    { name: "福建", file: "fujian" },
+    { name: "江西", file: "jiangxi" },
+    { name: "山东", file: "shandong" },
+  
+    { name: "河南", file: "henan" },
+    { name: "湖北", file: "hubei" },
+    { name: "湖南", file: "hunan" },
+    { name: "广东", file: "guangdong" },
+  
+    { name: "海南", file: "hainan" },
+    { name: "四川", file: "sichuan" },
+    { name: "贵州", file: "guizhou" },
+    { name: "云南", file: "yunnan" },
+    { name: "陕西", file: "shaanxi" },
+  
+    { name: "甘肃", file: "gansu" },
+    { name: "青海", file: "qinghai" },
+    { name: "台湾", file: "taiwan" },
+  
+    { name: "内蒙古", file: "inner_mongolia" },
+    { name: "广西", file: "guangxi" },
+    { name: "西藏", file: "xizang" },
+    { name: "宁夏", file: "ningxia" },
+    { name: "新疆", file: "xinjiang" },
+  
+    { name: "香港", file: "hongkong" },
+    { name: "澳门", file: "macau" }
+  ];
+
 let currentLevel = "home";   // home / central / local / province
 let isInitialized = false;
 const list = document.getElementById("leaderList");
@@ -95,7 +139,7 @@ searchInput.addEventListener("input", function() {
 });
 
 function loadProvince(province) {
-    fetch("./data/${province}.json")
+    fetch(`./data/${province}.json`)
       .then(res => res.json())
       .then(data => {
   
@@ -213,22 +257,18 @@ loadProvince(currentProvince);
   }
 
   function openLocal() {
-    const list = [
-      { name: "湖南", file: "hunan" },
-      { name: "湖北", file: "hubei" }
-    ];
-  
     const container = document.querySelector(".sidebar");
   
     container.innerHTML = `<div class="group-title">地方省份</div>`;
   
-    list.forEach(p => {
+    provinces.forEach(p => {
       const btn = document.createElement("div");
-      btn.className = "card";
-      btn.innerHTML = `<h3>${p.name}</h3>`;
+      btn.className = "province-btn";   // ⚠️ 关键：统一样式
+      btn.textContent = p.name;
   
       btn.onclick = () => loadProvince(p.file);
   
       container.appendChild(btn);
     });
   }
+  

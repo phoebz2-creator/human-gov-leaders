@@ -1,0 +1,13 @@
+{
+  "province": "shanghai",
+  "province_zh": "上海",
+  "base_url": "https://www.shanghai.gov.cn",
+  "government_leaders": ["龚正", "张小宏", "刘多", "华源", "解冬", "张亚宏", "陈宇剑", "陈杰"],
+  "department_leaders": [
+    "顾军(市发展改革委主任)", 
+    "王华杰(市财政局局长)", 
+    "张亚宏(兼市公安局局长)", 
+    "周亚明(市教育委主任)",
+    "张英(市经济信息化委主任)"
+  ]
+}

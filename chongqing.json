@@ -1,0 +1,12 @@
+{
+  "province": "chongqing",
+  "province_zh": "重庆",
+  "base_url": "https://www.cq.gov.cn",
+  "government_leaders": ["胡衡华", "明巨", "商奎", "张国智", "但彦铮", "江敦涛", "马震"],
+  "department_leaders": [
+    "高健(市发展改革委主任)", 
+    "姜国杰(市财政局局长)", 
+    "张安疆(市公安局局长)", 
+    "刘宴兵(市教育委主任)"
+  ]
+}

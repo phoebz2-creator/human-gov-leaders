@@ -1,0 +1,13 @@
+{
+    "province": "guangdong",
+    "province_zh": "广东",
+    "base_url": "https://www.gd.gov.cn",
+    "government_leaders": ["王伟中", "张虎", "张少康", "刘国周", "林涛", "刘红兵", "骁央"],
+    "department_leaders": [
+      "艾学峰(省发展改革委主任)", 
+      "戴运龙(省财政厅厅长)", 
+      "刘国周(兼省公安厅厅长)", 
+      "朱孔军(省教育厅厅长)",
+      "涂高坤(省工业和信息化厅厅长)"
+    ]
+  }
