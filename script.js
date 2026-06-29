@@ -139,11 +139,17 @@ searchInput.addEventListener("input", function() {
 });
 
 function loadProvince(province) {
-    fetch(`./data/${province}.json`)
+    // 抛弃去要单独文件的逻辑，直接去读本地和线上都有的合并大数据库
+    fetch("./data/all_leaders_combined.json")
       .then(res => res.json())
-      .then(data => {
+      .then(allData => {
+        
+        // 从总数据库里，过滤出当前点击省份的数据
+        // 这里的 item.province 对应你的 beijing, henan, inner_mongolia 等
+        const provinceData = allData.filter(item => item.province === province);
   
-        leaders = data.map((item, index) => ({
+        // 保持你原本的映射、渲染和刷新逻辑 100% 不变
+        leaders = provinceData.map((item, index) => ({
           id: index + 1,
           ...item
         }));
@@ -156,10 +162,13 @@ function loadProvince(province) {
   
         if (leaders.length > 0) {
           showDetail(leaders[0].id);
+        } else {
+          // 防错提示
+          document.getElementById("leaderDetail").innerHTML = `<h2>暂无数据</h2><p>该省份数据正在对齐中。</p>`;
         }
       })
-      .catch(err => console.error(err));
-  }
+      .catch(err => console.error("数据加载失败:", err));
+}
   
   // 初始化加载
   let currentProvince = "hunan";
