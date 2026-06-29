@@ -139,16 +139,22 @@ searchInput.addEventListener("input", function() {
 });
 
 function loadProvince(province) {
+    // 直接读取线上的总数据库
     fetch("./data/all_leaders_combined.json")
       .then(res => res.json())
       .then(allData => {
-        
-        // 💡 核心修复行：如果是对象格式，用 Object.values 把它强制转换成数组
-        const dataArray = Array.isArray(allData) ? allData : Object.values(allData).flat();
   
-        // 使用转换后的标准数组进行过滤
-        const provinceData = dataArray.filter(item => item.province === province);
-  
+        // 💡 针对你的字典格式的终极修复行：
+        // 如果数据是一个包含了各个省份的字典对象，就直接用 province 名字（如 "hunan"）去取它的数组
+        // 如果它本来就是一个平铺的数组，就用 filter 过滤。这样两端都能 100% 兼容。
+        let provinceData = [];
+        if (allData && typeof allData === "object" && !Array.isArray(allData)) {
+            provinceData = allData[province] || [];
+        } else if (Array.isArray(allData)) {
+            provinceData = allData.filter(item => item.province === province);
+        }
+
+        // 以下保持你原本的映射、渲染和刷新逻辑 100% 动都不动
         leaders = provinceData.map((item, index) => ({
           id: index + 1,
           ...item
@@ -156,12 +162,15 @@ function loadProvince(province) {
   
         renderList();
   
+        // 🔥 强制刷新 UI
         document.querySelectorAll(".card")
           .forEach(c => c.classList.remove("active"));
   
         if (leaders.length > 0) {
           showDetail(leaders[0].id);
         } else {
+          // 如果某省份真的没数据，给一个友好的提示，页面也不会崩溃卡死
+          document.getElementById("leaderList").innerHTML = `<div class="group-title">暂无数据</div>`;
           document.getElementById("leaderDetail").innerHTML = `<h2>暂无数据</h2><p>该省份数据正在对齐中。</p>`;
         }
       })
